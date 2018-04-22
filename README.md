@@ -1,4 +1,4 @@
-# - Zemberek Türkçe Doğal Dil İşleme Docker Mikroservis Sunucusu 
+# Zemberek Türkçe Doğal Dil İşleme Docker Mikroservis Sunucusu 
 ## Zemberek Turkish NLP Dockerized REST Microservice Server
 Türkçe eklemeli bir dil olduğu için Hint-Avrupa dilleri için geliştirilmiş araçlar Türkçe için iyi sonuç vermemektedir. 
 
