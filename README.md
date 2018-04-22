@@ -1,24 +1,61 @@
-# - Zemberek Türkçe Doğal Dil İşleme Docker Sunucusu 
-## Zemberek Turkish NLP Dockerized REST Server 
-Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in Sparkjava ile REST sunucusu. Sisteminize Java vb bağlılıkları kurmadan kolayca Türkçe NLP kaynaklara erişebilirsiniz.
+# - Zemberek Türkçe Doğal Dil İşleme Docker Mikroservis Sunucusu 
+## Zemberek Turkish NLP Dockerized REST Microservice Server
+Türkçe eklemeli bir dil olduğu için Hint-Avrupa dilleri için geliştirilmiş araçlar Türkçe için iyi sonuç vermemektedir. 
+
+Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in Sparkjava ile mikroservis REST sunucusu. Sisteminize Java vb bağlılıkları uğraşmadan Python, Ruby, Php, JavaScript vb dillerle kolayca Türkçe Doğal İşleme işlemlerinizi yapabilirsiniz.
 
 ## Zemberek
 [`Zemberek`](https://github.com/ahmetaa/zemberek-nlp) [`Zemberek Örnekler`](https://github.com/ahmetaa/turkish-nlp-examples)
 
-## [`Spark`](http://sparkjava.com/)
-Spark varsayılan olarak 4567 portları üzerinde çalışıyor.
+## Mikroservis REST sunucusu - Spark
+[`Spark`](http://sparkjava.com/) varsayılan olarak 4567 portları üzerinde çalışıyor.
 
 ## Kurulum
 ``` 
 docker build -t zemberek-test .
 docker run -p 4567:4567 zemberek-test
 ```
+Bunun ardından http://localhost:4567 üzerinden endpointlere erişebilirsiniz.
 
 ## Kullanım 
 Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız dildeki kütüphaneler (faraday vb) ile çağırabilirsiniz. 
 
-## Endpointler
-http://localhost:4567/find_pos?sentence=Bu bizim ilk denememiz
+**Part of Speech Etiketleme**
+----
+  Returns json data about a single user.
+
+* **URL**
+
+  /find_pos
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `sentence=[text]`
+
+* **Data Params**
+
+  None
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/find_pos?sentence=Bu bizim ilk denememiz",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+  REST URL:
+  http://localhost:4567/find_pos?sentence=Bu bizim ilk denememiz
 
 
 ![Örnek Endpoint Ekran Görüntüsü](/docs/endpoint-screenshot.png)
