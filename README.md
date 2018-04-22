@@ -22,7 +22,7 @@ Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız d
 
 **Part of Speech Etiketleme**
 ----
-  Returns json data about a single user.
+  POS bilgisini döner
 
 * **URL**
 
@@ -54,8 +54,9 @@ Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız d
       }
     });
   ```
-  REST URL:
+  ```curl
   http://localhost:4567/find_pos?sentence=Bu bizim ilk denememiz
+  ```
 
 
 ![Örnek Endpoint Ekran Görüntüsü](/docs/endpoint-screenshot.png)
