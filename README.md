@@ -14,8 +14,8 @@ Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in 
 ``` 
 git clone https://github.com/cbilgili/zemberek-nlp-server.git
 cd zemberek-nlp-server
-docker build -t zemberek-test .
-docker run -p 4567:4567 zemberek-test
+docker build -t zemberek-nlp-server .
+docker run -p 4567:4567 zemberek-nlp-server
 ```
 Bunun ardından http://localhost:4567 üzerinden endpointlere erişebilirsiniz.
 
