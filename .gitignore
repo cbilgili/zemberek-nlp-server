@@ -3,3 +3,9 @@
 .idea/misc.xml
 
 .idea/vcs.xml
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
