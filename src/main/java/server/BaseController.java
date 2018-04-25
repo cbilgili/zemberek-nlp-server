@@ -2,13 +2,15 @@ package server;
 
 import static spark.Spark.after;
 //import static spark.Spark.before;
-//import static spark.Spark.exception;
+import static spark.Spark.exception;
 //import static spark.Spark.halt;
+import org.eclipse.jetty.http.HttpStatus;
 
+import com.google.gson.Gson;
 //import spark.Request;
 
 public class BaseController {
-    public BaseController() {
+    public BaseController(final Gson jsonConverter) {
 
         // -- Check the authentication
 //        before((req, res) -> {
@@ -21,7 +23,14 @@ public class BaseController {
         });
 
         // -- Handle the exceptions
-        // handleExceptions(jsonConverter);
+        handleExceptions(jsonConverter);
+    }
+
+    protected void handleExceptions(final Gson jsonConverter) {
+        exception(Exception.class, (ex, req, res) -> {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR_500);
+            res.body(jsonConverter.toJson(ex.getMessage()));
+        });
     }
 
 }

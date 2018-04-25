@@ -1,6 +1,7 @@
 .idea
 .idea/*
 .idea/misc.xml
+target/*
 
 .idea/vcs.xml
 *.class

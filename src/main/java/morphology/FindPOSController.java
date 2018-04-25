@@ -20,7 +20,7 @@ public class FindPOSController extends BaseController {
 
 
     public FindPOSController(Gson jsonConverter) throws IOException {
-        super();
+        super(jsonConverter);
         initializeController(jsonConverter);
     }
 
