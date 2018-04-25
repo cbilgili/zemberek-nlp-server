@@ -34,7 +34,7 @@ public class FindPOSController extends BaseController {
 
         this.analyzer = sentenceAnalyzer;
         this.morphology = morphology;
-        get("/find_pos", (req, res) -> {
+        post("/find_pos", (req, res) -> {
             String sentence = req.queryParams("sentence");
             SentenceAnalysis analysis = this.analyzer.analyze(sentence);
             this.analyzer.disambiguate(analysis);

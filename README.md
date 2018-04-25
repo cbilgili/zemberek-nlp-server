@@ -32,32 +32,31 @@ Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız d
 
 * **Method:**
 
-  `GET`
+  `POST`
   
 *  **URL Params**
 
-   **Required:**
- 
-   `sentence=[text]`
 
 * **Data Params**
 
-  None
+  **Required:**
+ 
+    `sentence=[text]`
 
 * **Sample Call:**
 
   ```javascript
     $.ajax({
-      url: "/find_pos?sentence=Bu bizim ilk denememiz",
+      url: "/find_pos",
       dataType: "json",
-      type : "GET",
+      type : "POST",
+      data: { 
+        'foo': '[text]'
+      }
       success : function(r) {
         console.log(r);
       }
     });
-  ```
-  ```curl
-  http://localhost:4567/find_pos?sentence=Bu bizim ilk denememiz
   ```
 
 
