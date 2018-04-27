@@ -41,7 +41,6 @@ public class AnalyzeSentenceController extends BaseController {
             }
             SentenceAnalysis sentenceAnalysis = sentenceAnalyzer.analyze(sentence);
             if (disambiguate.equals("1")) {
-                morphology
                 sentenceAnalyzer.disambiguate(sentenceAnalysis);
             }
             List<SentenceItem> sentence_item_list = new ArrayList<SentenceItem>();
