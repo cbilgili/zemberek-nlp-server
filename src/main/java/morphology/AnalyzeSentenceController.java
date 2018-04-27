@@ -14,10 +14,10 @@ import java.util.List;
 
 import static spark.Spark.post;
 
-public class DisambiguateSentencesController extends BaseController {
+public class AnalyzeSentenceController extends BaseController {
 
 
-    public DisambiguateSentencesController(Gson jsonConverter) throws IOException {
+    public AnalyzeSentenceController(Gson jsonConverter) throws IOException {
         super(jsonConverter);
         initializeController(jsonConverter);
     }
@@ -33,6 +33,7 @@ public class DisambiguateSentencesController extends BaseController {
         post("/analyze_sentence", (req, res) -> {
             String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String disambiguate = (req.queryParams("disambiguate") != null) ? req.queryParams("disambiguate") : "1";
+            String deep_word_analysis = (req.queryParams("deep_word_analysis") != null) ? req.queryParams("deep_word_analysis") : "0";
             String sentence = req.queryParams("sentence");
             SentenceResults sentence_result = new SentenceResults();
             if (show_input.equals("1")) {
@@ -40,6 +41,7 @@ public class DisambiguateSentencesController extends BaseController {
             }
             SentenceAnalysis sentenceAnalysis = sentenceAnalyzer.analyze(sentence);
             if (disambiguate.equals("1")) {
+                morphology
                 sentenceAnalyzer.disambiguate(sentenceAnalysis);
             }
             List<SentenceItem> sentence_item_list = new ArrayList<SentenceItem>();
@@ -47,7 +49,20 @@ public class DisambiguateSentencesController extends BaseController {
                 SentenceItem sentence_item = new SentenceItem();
                 sentence_item.input = entry.input;
                 List<AnalyzeWordItem> analyze_list = new ArrayList<AnalyzeWordItem>();
-                for (WordAnalysis analysis : entry.parses) {
+                if (deep_word_analysis.equals("1")) {
+                    for (WordAnalysis analysis : entry.parses) {
+                        AnalyzeWordItem analze_item = new AnalyzeWordItem();
+                        analze_item.root = analysis.getRoot();
+                        analze_item.dictionary_item_name = analysis.getDictionaryItem().lemma;
+                        analze_item.no_surface = analysis.formatNoSurface();
+                        analze_item.long_format = analysis.formatLong();
+                        analze_item.no_empty = analysis.formatNoEmpty();
+                        analze_item.lazer = analysis.formatOflazer();
+                        analze_item.only_igs = analysis.formatOnlyIgs();
+                        analyze_list.add(analze_item);
+                    }
+                } else {
+                    WordAnalysis analysis = entry.parses.get(0);
                     AnalyzeWordItem analze_item = new AnalyzeWordItem();
                     analze_item.root = analysis.getRoot();
                     analze_item.dictionary_item_name = analysis.getDictionaryItem().lemma;

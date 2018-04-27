@@ -3,7 +3,7 @@ package server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import morphology.AnalyzeWordController;
-import morphology.DisambiguateSentencesController;
+import morphology.AnalyzeSentenceController;
 import morphology.FindPOSController;
 import morphology.StemmingAndLemmatizationController;
 import normalization.SpellingController;
@@ -25,6 +25,6 @@ public class ServiceMain {
         new SpellingController(jsonConverter);
         new StemmingAndLemmatizationController(jsonConverter);
         new AnalyzeWordController(jsonConverter);
-        new DisambiguateSentencesController(jsonConverter);
+        new AnalyzeSentenceController(jsonConverter);
     }
 }
