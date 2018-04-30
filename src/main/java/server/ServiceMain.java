@@ -10,21 +10,26 @@ import normalization.SpellingController;
 import tokenization.SentenceBoundaryDetectionController;
 import tokenization.TurkishTokenizationController;
 import utils.ZemberekExclusionStrategy;
+import zemberek.morphology.analysis.tr.TurkishMorphology;
 
 import java.io.IOException;
 
 public class ServiceMain {
     public static void main(String[] args) throws IOException {
+        // JSON converter
         Gson jsonConverter = new GsonBuilder()
                 .addSerializationExclusionStrategy(new ZemberekExclusionStrategy())
                 .disableInnerClassSerialization()
                 .create();
-        new FindPOSController(jsonConverter);
+        // Turkish defauly morphology
+        TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
+
+        new FindPOSController(jsonConverter, morphology);
         new SentenceBoundaryDetectionController(jsonConverter);
         new TurkishTokenizationController(jsonConverter);
-        new SpellingController(jsonConverter);
-        new StemmingAndLemmatizationController(jsonConverter);
-        new AnalyzeWordController(jsonConverter);
-        new AnalyzeSentenceController(jsonConverter);
+        new SpellingController(jsonConverter, morphology);
+        new StemmingAndLemmatizationController(jsonConverter, morphology);
+        new AnalyzeWordController(jsonConverter, morphology);
+        new AnalyzeSentenceController(jsonConverter, morphology);
     }
 }

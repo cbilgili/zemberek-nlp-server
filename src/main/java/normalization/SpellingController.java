@@ -12,13 +12,12 @@ import static spark.Spark.post;
 
 public class SpellingController extends BaseController {
 
-    public SpellingController(Gson jsonConverter) throws IOException {
+    public SpellingController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         super(jsonConverter);
-        initializeController(jsonConverter);
+        initializeController(jsonConverter, morphology);
     }
 
-    public void initializeController(Gson jsonConverter) throws IOException {
-        TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
+    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         TurkishSpellChecker spellChecker = new TurkishSpellChecker(morphology);
 
         post("/spelling_check", (req, res) -> {

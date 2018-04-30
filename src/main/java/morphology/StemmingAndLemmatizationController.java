@@ -13,13 +13,12 @@ import static spark.Spark.post;
 
 public class StemmingAndLemmatizationController extends BaseController {
 
-    public StemmingAndLemmatizationController(Gson jsonConverter) throws IOException {
+    public StemmingAndLemmatizationController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         super(jsonConverter);
-        initializeController(jsonConverter);
+        initializeController(jsonConverter, morphology);
     }
 
-    public void initializeController(Gson jsonConverter) throws IOException {
-        TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
+    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
 
         post("/stems", (req, res) -> {
             String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";

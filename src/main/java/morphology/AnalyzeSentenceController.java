@@ -17,13 +17,12 @@ import static spark.Spark.post;
 public class AnalyzeSentenceController extends BaseController {
 
 
-    public AnalyzeSentenceController(Gson jsonConverter) throws IOException {
+    public AnalyzeSentenceController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         super(jsonConverter);
-        initializeController(jsonConverter);
+        initializeController(jsonConverter, morphology);
     }
 
-    public void initializeController(Gson jsonConverter) throws IOException {
-        TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
+    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         Z3MarkovModelDisambiguator disambiguator = new Z3MarkovModelDisambiguator();
         TurkishSentenceAnalyzer sentenceAnalyzer = new TurkishSentenceAnalyzer(
                 morphology,

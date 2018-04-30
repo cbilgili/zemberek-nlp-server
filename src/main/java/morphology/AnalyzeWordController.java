@@ -13,13 +13,12 @@ import static spark.Spark.post;
 
 public class AnalyzeWordController extends BaseController {
 
-    public AnalyzeWordController(Gson jsonConverter) throws IOException {
+    public AnalyzeWordController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
         super(jsonConverter);
-        initializeController(jsonConverter);
+        initializeController(jsonConverter, morphology);
     }
 
-    public void initializeController(Gson jsonConverter) throws IOException {
-        TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
+    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
 
         post("/analyze_word", (req, res) -> {
             String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
