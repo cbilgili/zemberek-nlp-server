@@ -29,7 +29,6 @@ Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız d
 * [Cümle Öğelerine Ayırma (Token Iterator)](API.md) : `POST /token_iterator`
 * [Yazım Kontrolü (Spelling Check)](API.md) : `POST /spelling_check`
 * [Yazım Önerimi (Spelling Suggestions)](API.md) : `POST /spelling_suggestions`
-* [Yazım Önerimi (Spelling Suggestions)](API.md) : `POST /spelling_suggestions`
 * [Kelime Kökleri (Stemming)](API.md) : `POST /stems`
 * [Kelime Kökleri (Lemmas)](API.md) : `POST /lemmas`
 * [Kelime Analizi (Analyze Word)](API.md) : `POST /analyze_word`
