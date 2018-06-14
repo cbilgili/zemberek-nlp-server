@@ -1,0 +1,339 @@
+{
+  "info": {
+    "name": "Zemberek API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "version": "v0.0.0"
+  },
+  "item": [
+    {
+      "name": "spelling_check",
+      "item": [
+        {
+          "name": "Spelling Check",
+          "request": {
+            "url": "http://localhost:4567/spelling_check",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "Ankara'da",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "stems",
+      "item": [
+        {
+          "name": "Stems",
+          "request": {
+            "url": "http://localhost:4567/stems",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "Düşürttürmek",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "spelling_suggestions",
+      "item": [
+        {
+          "name": "Spelling Check Duplicate",
+          "request": {
+            "url": "http://localhost:4567/spelling_suggestions",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "Ankara'da",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "lemmas",
+      "item": [
+        {
+          "name": "Lemmas",
+          "request": {
+            "url": "http://localhost:4567/lemmas",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "İzmir'de",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "sentence_boundary_detection",
+      "item": [
+        {
+          "name": "Sentence Boundary Detection",
+          "request": {
+            "url": "http://localhost:4567/sentence_boundary_detection",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "sentence",
+                  "value": "Kahvaltı sonrası Birbirinden güzel Savsat köylerini gezeceğiz. Otantik dokusu bozulmamış köylerin her biri birer tablo gibi. Ciritdüzü ilk göreceğimiz köy. Daha sonra Cevizli (Tibet ) köyündeki Tibeti Kilisesi'ni gezeceğiz.",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_pos",
+      "item": [
+        {
+          "name": "Find POS",
+          "request": {
+            "url": "http://localhost:4567/find_pos",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "sentence",
+                  "value": "Gezimizin dokuzuncu gününde otelde alınan kahvaltı sonrası hareketle ilk olarak Hıdırlık Tepesi’nden Safranbolu’yu yukarıdan görerek rehberimizden bilgi alıyor ve Eski Hükümet Konağı, Cinci Hanı, Cinci Hamamı, Saat Kulesi’ni fotoğraflıyoruz",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "token_iterator",
+      "item": [
+        {
+          "name": "Token Iterartor",
+          "request": {
+            "url": "http://localhost:4567/token_iterator",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "sentence",
+                  "value": "#new_line Okulda beraber gittiğimiz @gknustr ile beraber yoldayız. 21.03.2018 tarihinde www.bearingcloud.com adrsine girilmiş.",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "key": "token_mode",
+                  "value": "all",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "analyze_sentence",
+      "item": [
+        {
+          "name": "Analyze sentence",
+          "request": {
+            "url": "http://localhost:4567/analyze_sentence",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "sentence",
+                  "value": "Bodrum Otelleri",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "key": "disambiguate",
+                  "value": "0",
+                  "enabled": true
+                },
+                {
+                  "key": "deep_word_analysis",
+                  "value": "0",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "simple_tokenization",
+      "item": [
+        {
+          "name": "Simple Tokenization",
+          "request": {
+            "url": "http://localhost:4567/simple_tokenization",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "sentence",
+                  "value": "3. Gün sonunda İstanbul'a, Merhaba saat 14:00 da 12 Ekim 2019",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "analyze_word",
+      "item": [
+        {
+          "name": "Analyze word",
+          "request": {
+            "url": "http://localhost:4567/analyze_word",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "Bodrum",
+                  "enabled": true
+                },
+                {
+                  "key": "show_input",
+                  "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -20,47 +20,19 @@ docker run -p 4567:4567 zemberek-nlp-server
 Bunun ardından http://localhost:4567 üzerinden endpointlere erişebilirsiniz.
 
 ## Kullanım 
-Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız dildeki kütüphaneler (faraday vb) ile çağırabilirsiniz. 
+Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız dildeki kütüphaneler (faraday vb) ile çağırabilirsiniz. Proje içinde [Postman (v2)](api_postman_v2.json) dosyasını indirip denemeler yapabilirsiniz.
 
-**Part of Speech Etiketleme**
-----
-  POS bilgisini döner
-
-* **URL**
-
-  /find_pos
-
-* **Method:**
-
-  `POST`
-  
-*  **URL Params**
-
-
-* **Data Params**
-
-  **Required:**
- 
-    `sentence=[text]`
-
-* **Sample Call:**
-
-  ```javascript
-    $.ajax({
-      url: "/find_pos",
-      dataType: "json",
-      type : "POST",
-      data: { 
-        'foo': '[text]'
-      }
-      success : function(r) {
-        console.log(r);
-      }
-    });
-  ```
-
+## API Endpointleri
+* [Cümle Sınırı Denetleme (Sentence Boundary Detection)](API.md) : `POST /sentence_boundary_detection`
+* [Cümlenin Öğeleri Etiketleme (Part of Speech Tagging)](API.md) : `POST /find_pos`
+* [Temel Cümle Öğelerine Ayırma (Simple Tokenization)](API.md) : `POST /simple_tokenization`
+* [Cümle Öğelerine Ayırma (Token Iterator)](API.md) : `POST /token_iterator`
+* [Yazım Kontrolü (Spelling Check)](API.md) : `POST /spelling_check`
+* [Yazım Önerimi (Spelling Suggestions)](API.md) : `POST /spelling_suggestions`
+* [Yazım Önerimi (Spelling Suggestions)](API.md) : `POST /spelling_suggestions`
+* [Kelime Kökleri (Stemming)](API.md) : `POST /stems`
+* [Kelime Kökleri (Lemmas)](API.md) : `POST /lemmas`
+* [Kelime Analizi (Analyze Word)](API.md) : `POST /analyze_word`
+* [Cümle Analizi (Analyze Sentence)](API.md) : `POST /analyze_sentence`
 
 ![Örnek Endpoint Ekran Görüntüsü](/docs/endpoint-screenshot.png)
-
-** Proje beta sürümündedir **
-@WIP
