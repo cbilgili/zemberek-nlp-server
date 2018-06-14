@@ -2,10 +2,10 @@
 ## Zemberek Turkish NLP Dockerized REST Microservice Server
 Türkçe eklemeli bir dil olduğu için Hint-Avrupa dilleri için geliştirilmiş araçlar Türkçe için iyi sonuç vermemektedir. 
 
-Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in Sparkjava ile mikroservis REST sunucusu. Sisteminize Java vb bağlılıkları uğraşmadan Python, Ruby, Php, JavaScript vb dillerle kolayca Türkçe Doğal İşleme işlemlerinizi yapabilirsiniz.
+Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in Sparkjava ile mikroservis REST sunucusu. Sisteminize Java vb bağlılıkları uğraşmadan Python, Ruby, Php, JavaScript vb dillerle kolayca Türkçe Doğal Dil İşleme işlemlerinizi yapabilirsiniz.
 
 ## Zemberek
-[`Zemberek`](https://github.com/ahmetaa/zemberek-nlp) [`Zemberek Örnekler`](https://github.com/ahmetaa/turkish-nlp-examples)
+[`Zemberek`](https://github.com/ahmetaa/zemberek-nlp) [`Zemberek Örnekler`](https://github.com/ahmetaa/turkish-nlp-examples). Projede mevcut olarak Zemberek'in 0.11.1 sürümünü kullanılmaktadır.
 
 ## Mikroservis REST sunucusu - Spark
 [`Spark`](http://sparkjava.com/) varsayılan olarak 4567 portları üzerinde çalışıyor.
