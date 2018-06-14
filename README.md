@@ -20,7 +20,7 @@ docker run -p 4567:4567 zemberek-nlp-server
 Bunun ardından http://localhost:4567 üzerinden endpointlere erişebilirsiniz.
 
 ## Kullanım 
-Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız dildeki kütüphaneler (faraday vb) ile çağırabilirsiniz. Proje içinde [Postman (v2)](api_postman_v2.json) dosyasını indirip denemeler yapabilirsiniz.
+Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız dildeki kütüphaneler (faraday vb) ile çağırabilirsiniz. Proje içindeki [Postman (v2)](api_postman_v2.json) dosyasını indirip denemeler yapabilirsiniz.
 
 ## API Endpointleri
 * [Cümle Sınırı Denetleme (Sentence Boundary Detection)](API.md) : `POST /sentence_boundary_detection`
