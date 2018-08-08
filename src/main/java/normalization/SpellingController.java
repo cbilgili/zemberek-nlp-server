@@ -2,7 +2,7 @@ package normalization;
 
 import com.google.gson.Gson;
 import server.BaseController;
-import zemberek.morphology.analysis.tr.TurkishMorphology;
+import zemberek.morphology.TurkishMorphology;
 import zemberek.normalization.TurkishSpellChecker;
 
 import java.io.IOException;

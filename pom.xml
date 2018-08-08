@@ -65,23 +65,23 @@
     <dependencies>
         <dependency>
             <groupId>zemberek-nlp</groupId>
-            <artifactId>core</artifactId>
-            <version>0.11.1</version>
+            <artifactId>zemberek-core</artifactId>
+            <version>0.15.0</version>
         </dependency>
         <dependency>
             <groupId>zemberek-nlp</groupId>
-            <artifactId>tokenization</artifactId>
-            <version>0.11.1</version>
+            <artifactId>zemberek-tokenization</artifactId>
+            <version>0.15.0</version>
         </dependency>
         <dependency>
             <groupId>zemberek-nlp</groupId>
-            <artifactId>morphology</artifactId>
-            <version>0.11.1</version>
+            <artifactId>zemberek-morphology</artifactId>
+            <version>0.15.0</version>
         </dependency>
         <dependency>
             <groupId>zemberek-nlp</groupId>
-            <artifactId>normalization</artifactId>
-            <version>0.11.1</version>
+            <artifactId>zemberek-normalization</artifactId>
+            <version>0.15.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -12,12 +12,12 @@ import com.google.gson.Gson;
 
 public class SentenceBoundaryDetectionController extends BaseController {
 
-    public SentenceBoundaryDetectionController(Gson jsonConverter) throws IOException {
+    public SentenceBoundaryDetectionController(Gson jsonConverter) {
         super(jsonConverter);
-        initializeController(jsonConverter);
+        initializeController();
     }
 
-    public void initializeController(Gson jsonConverter) throws IOException {
+    public void initializeController() {
         post("/sentence_boundary_detection", (req, res) -> {
             String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String sentence = req.queryParams("sentence");

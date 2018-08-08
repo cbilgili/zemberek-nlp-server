@@ -1,60 +1,44 @@
 package morphology;
 
-import server.BaseController;
-import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
-import zemberek.morphology.analysis.SentenceAnalysis;
-import zemberek.morphology.analysis.WordAnalysis;
-import zemberek.morphology.analysis.tr.TurkishMorphology;
-import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
-//
-import java.io.IOException;
-import static spark.Spark.*;
+import static spark.Spark.post;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import server.BaseController;
+import zemberek.morphology.TurkishMorphology;
+import zemberek.morphology.analysis.SentenceAnalysis;
+import zemberek.morphology.analysis.SingleAnalysis;
+
+
 import com.google.gson.Gson;
 
 public class FindPOSController extends BaseController {
 
-    TurkishSentenceAnalyzer analyzer;
-    TurkishMorphology morphology;
+    private TurkishMorphology morphology;
 
-
-    public FindPOSController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
+    public FindPOSController(Gson jsonConverter, TurkishMorphology morphology) {
         super(jsonConverter);
-        initializeController(jsonConverter, morphology);
+        this.morphology = morphology;
+        initializeController();
     }
 
-    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
-        Z3MarkovModelDisambiguator disambiguator = new Z3MarkovModelDisambiguator();
-        TurkishSentenceAnalyzer sentenceAnalyzer = new TurkishSentenceAnalyzer(
-                morphology,
-                disambiguator
-        );
-
-        this.analyzer = sentenceAnalyzer;
-        this.morphology = morphology;
+    public void initializeController() {
         post("/find_pos", (req, res) -> {
             String sentence = req.queryParams("sentence");
-            SentenceAnalysis analysis = this.analyzer.analyze(sentence);
-            this.analyzer.disambiguate(analysis);
-            List<POSResult> results = new ArrayList<POSResult>();
-
-
-
-            for (SentenceAnalysis.Entry entry : analysis) {
-                WordAnalysis wa = entry.parses.get(0);
+            SentenceAnalysis analysis = morphology.analyzeAndDisambiguate(sentence);
+            List<POSResult> results = new ArrayList<>();
+            for (SingleAnalysis entry : analysis.bestAnalysis()) {
                 POSResult item = new POSResult();
-                item.analysis = wa;
-                item.input = entry.input;
+                item.analysis = entry.formatLexical();
+                item.pos = entry.getPos().shortForm;
                 results.add(item);
             }
-
             return jsonConverter.toJson(results);
         });
     }
 }
 
 class POSResult {
-    public String input;
-    public WordAnalysis analysis;
+    public String pos;
+    public String analysis;
 }
