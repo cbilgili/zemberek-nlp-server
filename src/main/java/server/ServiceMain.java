@@ -10,7 +10,7 @@ import normalization.SpellingController;
 import tokenization.SentenceBoundaryDetectionController;
 import tokenization.TurkishTokenizationController;
 import utils.ZemberekExclusionStrategy;
-import zemberek.morphology.analysis.tr.TurkishMorphology;
+import zemberek.morphology.TurkishMorphology;
 
 import java.io.IOException;
 

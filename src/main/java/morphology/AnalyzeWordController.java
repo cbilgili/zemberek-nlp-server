@@ -38,7 +38,6 @@ public class AnalyzeWordController extends BaseController {
     }
 }
 
-
 class AnalyzeWordResults {
     public String input;
     public List<AnalyzeWordItem> results;
@@ -58,12 +57,15 @@ class AnalyzeWordItem {
         return analze_item;
     }
 
+    // TODO: Decide on which formats to expose.
     public String root;
     public String dictionary_item_name;
     public String long_format;
     public String no_surface;
+    @Deprecated
     public String no_empty;
     public String oflazer;
+    @Deprecated
     public String only_igs;
 
 }

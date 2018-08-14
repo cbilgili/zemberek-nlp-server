@@ -9,7 +9,6 @@ import zemberek.morphology.TurkishMorphology;
 import zemberek.morphology.analysis.SentenceAnalysis;
 import zemberek.morphology.analysis.SingleAnalysis;
 
-
 import com.google.gson.Gson;
 
 public class FindPOSController extends BaseController {
