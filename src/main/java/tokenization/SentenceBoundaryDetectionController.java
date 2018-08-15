@@ -7,6 +7,7 @@ import java.util.List;
 
 import java.io.IOException;
 import static spark.Spark.*;
+import static utils.ParameterHelper.showInput;
 
 import com.google.gson.Gson;
 
@@ -19,11 +20,10 @@ public class SentenceBoundaryDetectionController extends BaseController {
 
     public void initializeController() {
         post("/sentence_boundary_detection", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String sentence = req.queryParams("sentence");
             TurkishSentenceExtractor extractor = TurkishSentenceExtractor.DEFAULT;
             SentenceBoundaryDetectionResult result = new SentenceBoundaryDetectionResult();
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 result.input = sentence;
             }
             result.sentences = extractor.fromParagraph(sentence);

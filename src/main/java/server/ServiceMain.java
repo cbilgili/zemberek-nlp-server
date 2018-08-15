@@ -21,7 +21,7 @@ public class ServiceMain {
                 .addSerializationExclusionStrategy(new ZemberekExclusionStrategy())
                 .disableInnerClassSerialization()
                 .create();
-        // Turkish defauly morphology
+        // Turkish default morphology
         TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
 
         new FindPOSController(jsonConverter, morphology);

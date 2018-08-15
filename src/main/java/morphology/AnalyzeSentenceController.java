@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.post;
+import static utils.ParameterHelper.getBooleanParam;
+import static utils.ParameterHelper.showInput;
 
 public class AnalyzeSentenceController extends BaseController {
 
@@ -20,15 +22,14 @@ public class AnalyzeSentenceController extends BaseController {
     public void initializeController(Gson jsonConverter, TurkishMorphology morphology) {
 
         post("/analyze_sentence", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
-            String disambiguate = (req.queryParams("disambiguate") != null) ? req.queryParams("disambiguate") : "1";
+            boolean disambiguate = getBooleanParam(req, "disambiguate");
             String sentence = req.queryParams("sentence");
             SentenceResults sentence_result = new SentenceResults();
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 sentence_result.input = sentence;
             }
             List<SentenceItem> sentence_item_list = new ArrayList<>();
-            if (disambiguate.equals("1")) {
+            if (disambiguate) {
                 List<SingleAnalysis> singleAnalyses = morphology.analyzeAndDisambiguate(sentence)
                     .bestAnalysis();
                 for (SingleAnalysis analysis : singleAnalyses) {
@@ -48,6 +49,7 @@ public class AnalyzeSentenceController extends BaseController {
                         analyze_list.add(AnalyzeWordItem.fromSingleAnalysis(singleAnalysis));
                     }
                     sentence_item.results = analyze_list;
+                    sentence_item_list.add(sentence_item);
                 }
             }
             sentence_result.results = sentence_item_list;

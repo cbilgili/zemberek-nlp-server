@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.post;
+import static utils.ParameterHelper.showInput;
 
 public class TurkishTokenizationController extends BaseController {
 
@@ -22,7 +23,6 @@ public class TurkishTokenizationController extends BaseController {
     public void initializeController(Gson jsonConverter) throws IOException {
         post("/simple_tokenization", (req, res) -> {
             String sentence = (req.queryParams("sentence") != null) ? req.queryParams("sentence") : "";
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             // token_mode: default : all
             String token_mode = (req.queryParams("token_mode") != null) ? req.queryParams("token_mode") : "default";
             TurkishTokenizer tokenizer;
@@ -32,17 +32,15 @@ public class TurkishTokenizationController extends BaseController {
                 tokenizer = TurkishTokenizer.DEFAULT;
             }
             SimpleTokenizationResult result = new SimpleTokenizationResult();
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 result.input = sentence;
             }
             result.tokenizations = tokenizer.tokenizeToStrings(sentence);
-
             return jsonConverter.toJson(result);
         });
 
         post("/token_iterator", (req, res) -> {
             String sentence = (req.queryParams("sentence") != null) ? req.queryParams("sentence") : "";
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             // token_mode: default : all
             String token_mode = (req.queryParams("token_mode") != null) ? req.queryParams("token_mode") : "default";
             TurkishTokenizer tokenizer;
@@ -51,14 +49,11 @@ public class TurkishTokenizationController extends BaseController {
             } else {
                 tokenizer = TurkishTokenizer.DEFAULT;
             }
-//            TurkishTokenizer tokenizer = TurkishTokenizer.builder()
-//                    .ignoreTypes(TurkishLexer.Punctuation, TurkishLexer.NewLine, TurkishLexer.SpaceTab)
-//                    .build();
             List<Token> tokens = tokenizer.tokenize(sentence);
             TokenIteratorResult result_iterator = new TokenIteratorResult();
-            List<TokenResult> token_results = new ArrayList<TokenResult>();
+            List<TokenResult> token_results = new ArrayList<>();
 
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 result_iterator.input = sentence;
             }
 

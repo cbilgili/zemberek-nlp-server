@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.post;
+import static utils.ParameterHelper.showInput;
 
 public class AnalyzeWordController extends BaseController {
 
@@ -21,10 +22,9 @@ public class AnalyzeWordController extends BaseController {
     public void initializeController(Gson jsonConverter, TurkishMorphology morphology) {
 
         post("/analyze_word", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String word = req.queryParams("word");
             AnalyzeWordResults analyze_result = new AnalyzeWordResults();
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 analyze_result.input = word;
             }
             WordAnalysis results = morphology.analyze(word);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.post;
+import static utils.ParameterHelper.showInput;
 
 public class StemmingAndLemmatizationController extends BaseController {
 
@@ -21,11 +22,10 @@ public class StemmingAndLemmatizationController extends BaseController {
     public void initializeController(TurkishMorphology morphology) {
 
         post("/stems", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String word = req.queryParams("word");
             StemmingAndLemmatizationResults stem_and_lemma_result = new StemmingAndLemmatizationResults();
-            List<StemmingAndLemmatizationItem> stem_and_lemma_list = new ArrayList<StemmingAndLemmatizationItem>();
-            if (show_input.equals("1")) {
+            List<StemmingAndLemmatizationItem> stem_and_lemma_list = new ArrayList();
+            if (showInput(req)) {
                 stem_and_lemma_result.input = word;
             }
             WordAnalysis results = morphology.analyze(word);
@@ -40,11 +40,10 @@ public class StemmingAndLemmatizationController extends BaseController {
         });
 
         post("/lemmas", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
             String word = req.queryParams("word");
             StemmingAndLemmatizationResults stem_and_lemma_result = new StemmingAndLemmatizationResults();
-            List<StemmingAndLemmatizationItem> stem_and_lemma_list = new ArrayList<StemmingAndLemmatizationItem>();
-            if (show_input.equals("1")) {
+            List<StemmingAndLemmatizationItem> stem_and_lemma_list = new ArrayList();
+            if (showInput(req)) {
                 stem_and_lemma_result.input = word;
             }
             WordAnalysis results = morphology.analyze(word);
