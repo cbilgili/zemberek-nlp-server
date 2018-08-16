@@ -75,7 +75,7 @@
       "name": "spelling_suggestions",
       "item": [
         {
-          "name": "Spelling Check Duplicate",
+          "name": "Spelling Suggestions",
           "request": {
             "url": "http://localhost:4567/spelling_suggestions",
             "method": "POST",
@@ -327,6 +327,39 @@
                 {
                   "key": "show_input",
                   "value": "1",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "generate_words",
+      "item": [
+        {
+          "name": "Generate Words",
+          "request": {
+            "url": "http://localhost:4567/generate_words",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "word",
+                  "value": "yürümek",
+                  "enabled": true
+                },
+                {
+                  "key": "morphemes",
+                  "value": "Verb,Fut,Past,A3sg",
                   "enabled": true
                 }
               ]
