@@ -2,10 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import morphology.AnalyzeWordController;
-import morphology.AnalyzeSentenceController;
-import morphology.FindPOSController;
-import morphology.StemmingAndLemmatizationController;
+import morphology.*;
 import normalization.SpellingController;
 import tokenization.SentenceBoundaryDetectionController;
 import tokenization.TurkishTokenizationController;
@@ -31,5 +28,6 @@ public class ServiceMain {
         new StemmingAndLemmatizationController(jsonConverter, morphology);
         new AnalyzeWordController(jsonConverter, morphology);
         new AnalyzeSentenceController(jsonConverter, morphology);
+        new GenerateWordsController(jsonConverter);
     }
 }

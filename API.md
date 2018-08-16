@@ -502,5 +502,55 @@ curl -X POST "http://localhost:4567/analyze_sentence" \
 }
 ```
 
+### **POST** - /generate_words
+
+#### CURL
+
+```sh
+curl -X POST "http://localhost:4567/generate_words" \
+    -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
+    --data-raw "word"="yürümek" \
+    --data-raw "morphemes"="Verb,Fut,Past,A3sg"
+```
+
+#### Header Parameters
+
+- **Content-Type** should respect the following schema:
+
+```
+{
+  "type": "string",
+  "enum": [
+    "application/x-www-form-urlencoded; charset=utf-8"
+  ],
+  "default": "application/x-www-form-urlencoded; charset=utf-8"
+}
+```
+
+#### Body Parameters
+
+- **word** should respect the following schema:
+
+```
+{
+  "type": "string",
+  "enum": [
+    "yürümek"
+  ],
+  "default": "yürümek"
+}
+```
+- **morphemes** should respect the following schema:
+
+```
+{
+  "type": "string",
+  "enum": [
+    "Verb,Fut,Past,A3sg"
+  ],
+  "default": "Verb,Fut,Past,A3sg"
+}
+```
+
 ## References
 
