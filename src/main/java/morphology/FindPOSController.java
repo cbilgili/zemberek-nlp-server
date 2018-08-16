@@ -7,6 +7,7 @@ import java.util.List;
 import server.BaseController;
 import zemberek.morphology.TurkishMorphology;
 import zemberek.morphology.analysis.SentenceAnalysis;
+import zemberek.morphology.analysis.SentenceWordAnalysis;
 import zemberek.morphology.analysis.SingleAnalysis;
 
 import com.google.gson.Gson;
@@ -26,10 +27,14 @@ public class FindPOSController extends BaseController {
             String sentence = req.queryParams("sentence");
             SentenceAnalysis analysis = morphology.analyzeAndDisambiguate(sentence);
             List<POSResult> results = new ArrayList<>();
-            for (SingleAnalysis entry : analysis.bestAnalysis()) {
+            for (SentenceWordAnalysis entry : analysis.getWordAnalyses()) {
                 POSResult item = new POSResult();
-                item.analysis = entry.formatLexical();
-                item.pos = entry.getPos().shortForm;
+                SingleAnalysis bestAnalysis = entry.getBestAnalysis();
+                item.analysis = bestAnalysis.formatLexical();
+                item.normalizedInput = entry.wordAnalysis.getNormalizedInput();
+                item.pos = bestAnalysis.getPos().shortForm;
+                item.input = entry.wordAnalysis.getInput();
+                item.morphemesLexical = bestAnalysis.formatMorphemesLexical();
                 results.add(item);
             }
             return jsonConverter.toJson(results);
@@ -38,6 +43,9 @@ public class FindPOSController extends BaseController {
 }
 
 class POSResult {
+    public String input;
+    public String normalizedInput;
     public String pos;
     public String analysis;
+    public String morphemesLexical;
 }
