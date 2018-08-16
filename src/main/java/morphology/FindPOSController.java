@@ -30,6 +30,7 @@ public class FindPOSController extends BaseController {
                 POSResult item = new POSResult();
                 item.analysis = entry.formatLexical();
                 item.pos = entry.getPos().shortForm;
+                item.input = entry.surfaceForm();
                 results.add(item);
             }
             return jsonConverter.toJson(results);
@@ -38,6 +39,7 @@ public class FindPOSController extends BaseController {
 }
 
 class POSResult {
+    public String input;
     public String pos;
     public String analysis;
 }
