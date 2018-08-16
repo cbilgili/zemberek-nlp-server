@@ -10,7 +10,7 @@ import normalization.SpellingController;
 import tokenization.SentenceBoundaryDetectionController;
 import tokenization.TurkishTokenizationController;
 import utils.ZemberekExclusionStrategy;
-import zemberek.morphology.analysis.tr.TurkishMorphology;
+import zemberek.morphology.TurkishMorphology;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class ServiceMain {
                 .addSerializationExclusionStrategy(new ZemberekExclusionStrategy())
                 .disableInnerClassSerialization()
                 .create();
-        // Turkish defauly morphology
+        // Turkish default morphology
         TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
 
         new FindPOSController(jsonConverter, morphology);

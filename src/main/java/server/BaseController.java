@@ -10,7 +10,10 @@ import com.google.gson.Gson;
 //import spark.Request;
 
 public class BaseController {
+    protected final Gson jsonConverter;
+
     public BaseController(final Gson jsonConverter) {
+        this.jsonConverter = jsonConverter;
 
         // -- Check the authentication
 //        before((req, res) -> {

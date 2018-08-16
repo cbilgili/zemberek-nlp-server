@@ -2,77 +2,55 @@ package morphology;
 
 import com.google.gson.Gson;
 import server.BaseController;
-import zemberek.morphology.ambiguity.Z3MarkovModelDisambiguator;
-import zemberek.morphology.analysis.SentenceAnalysis;
+import zemberek.morphology.TurkishMorphology;
+import zemberek.morphology.analysis.SingleAnalysis;
 import zemberek.morphology.analysis.WordAnalysis;
-import zemberek.morphology.analysis.tr.TurkishMorphology;
-import zemberek.morphology.analysis.tr.TurkishSentenceAnalyzer;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.post;
+import static utils.ParameterHelper.getBooleanParam;
+import static utils.ParameterHelper.showInput;
 
 public class AnalyzeSentenceController extends BaseController {
 
-
-    public AnalyzeSentenceController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
+    public AnalyzeSentenceController(Gson jsonConverter, TurkishMorphology morphology) {
         super(jsonConverter);
         initializeController(jsonConverter, morphology);
     }
 
-    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) throws IOException {
-        Z3MarkovModelDisambiguator disambiguator = new Z3MarkovModelDisambiguator();
-        TurkishSentenceAnalyzer sentenceAnalyzer = new TurkishSentenceAnalyzer(
-                morphology,
-                disambiguator
-        );
+    public void initializeController(Gson jsonConverter, TurkishMorphology morphology) {
 
         post("/analyze_sentence", (req, res) -> {
-            String show_input = (req.queryParams("show_input") != null) ? req.queryParams("show_input") : "0";
-            String disambiguate = (req.queryParams("disambiguate") != null) ? req.queryParams("disambiguate") : "1";
-            String deep_word_analysis = (req.queryParams("deep_word_analysis") != null) ? req.queryParams("deep_word_analysis") : "0";
+            boolean disambiguate = getBooleanParam(req, "disambiguate");
             String sentence = req.queryParams("sentence");
             SentenceResults sentence_result = new SentenceResults();
-            if (show_input.equals("1")) {
+            if (showInput(req)) {
                 sentence_result.input = sentence;
             }
-            SentenceAnalysis sentenceAnalysis = sentenceAnalyzer.analyze(sentence);
-            if (disambiguate.equals("1")) {
-                sentenceAnalyzer.disambiguate(sentenceAnalysis);
-            }
-            List<SentenceItem> sentence_item_list = new ArrayList<SentenceItem>();
-            for (SentenceAnalysis.Entry entry : sentenceAnalysis) {
-                SentenceItem sentence_item = new SentenceItem();
-                sentence_item.input = entry.input;
-                List<AnalyzeWordItem> analyze_list = new ArrayList<AnalyzeWordItem>();
-                if (deep_word_analysis.equals("1")) {
-                    for (WordAnalysis analysis : entry.parses) {
-                        AnalyzeWordItem analze_item = new AnalyzeWordItem();
-                        analze_item.root = analysis.getRoot();
-                        analze_item.dictionary_item_name = analysis.getDictionaryItem().lemma;
-                        analze_item.no_surface = analysis.formatNoSurface();
-                        analze_item.long_format = analysis.formatLong();
-                        analze_item.no_empty = analysis.formatNoEmpty();
-                        analze_item.lazer = analysis.formatOflazer();
-                        analze_item.only_igs = analysis.formatOnlyIgs();
-                        analyze_list.add(analze_item);
-                    }
-                } else {
-                    WordAnalysis analysis = entry.parses.get(0);
-                    AnalyzeWordItem analze_item = new AnalyzeWordItem();
-                    analze_item.root = analysis.getRoot();
-                    analze_item.dictionary_item_name = analysis.getDictionaryItem().lemma;
-                    analze_item.no_surface = analysis.formatNoSurface();
-                    analze_item.long_format = analysis.formatLong();
-                    analze_item.no_empty = analysis.formatNoEmpty();
-                    analze_item.lazer = analysis.formatOflazer();
-                    analze_item.only_igs = analysis.formatOnlyIgs();
-                    analyze_list.add(analze_item);
+            List<SentenceItem> sentence_item_list = new ArrayList<>();
+            if (disambiguate) {
+                List<SingleAnalysis> singleAnalyses = morphology.analyzeAndDisambiguate(sentence)
+                    .bestAnalysis();
+                for (SingleAnalysis analysis : singleAnalyses) {
+                    SentenceItem sentence_item = new SentenceItem();
+                    sentence_item.input = analysis.surfaceForm();
+                    sentence_item.results = new ArrayList<>();
+                    sentence_item.results.add(AnalyzeWordItem.fromSingleAnalysis(analysis));
+                    sentence_item_list.add(sentence_item);
                 }
-                sentence_item.results = analyze_list;
-                sentence_item_list.add(sentence_item);
+            } else {
+                List<WordAnalysis> results = morphology.analyzeSentence(sentence);
+                List<AnalyzeWordItem> analyze_list = new ArrayList<>();
+                for (WordAnalysis wordAnalysis : results) {
+                    SentenceItem sentence_item = new SentenceItem();
+                    sentence_item.input = wordAnalysis.getInput();
+                    for (SingleAnalysis singleAnalysis : wordAnalysis.getAnalysisResults()) {
+                        analyze_list.add(AnalyzeWordItem.fromSingleAnalysis(singleAnalysis));
+                    }
+                    sentence_item.results = analyze_list;
+                    sentence_item_list.add(sentence_item);
+                }
             }
             sentence_result.results = sentence_item_list;
             return jsonConverter.toJson(sentence_result);
