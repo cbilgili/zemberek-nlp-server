@@ -21,7 +21,7 @@ public class GenerateWordsController extends BaseController {
     }
 
     public void initializeController() {
-        post("/generate_words", (req, res) -> {
+        post("/generate_word", (req, res) -> {
             String word = req.queryParams("word");
             String morphemes = req.queryParams("morphemes");
             TurkishMorphology morphology =

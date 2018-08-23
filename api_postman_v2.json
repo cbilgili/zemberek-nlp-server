@@ -336,12 +336,12 @@
       ]
     },
     {
-      "name": "generate_words",
+      "name": "generate_word",
       "item": [
         {
-          "name": "Generate Words",
+          "name": "Generate Word",
           "request": {
-            "url": "http://localhost:4567/generate_words",
+            "url": "http://localhost:4567/generate_word",
             "method": "POST",
             "header": [
               {

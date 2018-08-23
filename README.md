@@ -1,3 +1,4 @@
+
 # Zemberek Türkçe Doğal Dil İşleme Docker Mikroservis Sunucusu 
 ## Zemberek Turkish NLP Dockerized REST Microservice Server
 Türkçe eklemeli bir dil olduğu için Hint-Avrupa dilleri için geliştirilmiş araçlar Türkçe için iyi sonuç vermemektedir. 
@@ -11,9 +12,16 @@ Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in 
 [`Spark`](http://sparkjava.com/) varsayılan olarak 4567 portları üzerinde çalışıyor.
 
 ## Kurulum
+Dockerhub üzerindeki son sürümü kullanmak için;
+``` 
+docker pull cbilgili/zemberek-nlp-server:1.1
+docker run -p 4567:4567 cbilgili/zemberek-nlp-server:1.1
+``` 
+Yerel geliştirme ortamında çalıştırmak için;
 ``` 
 git clone https://github.com/cbilgili/zemberek-nlp-server.git
 cd zemberek-nlp-server
+mvn clean install
 docker build -t zemberek-nlp-server .
 docker run -p 4567:4567 zemberek-nlp-server
 ```
@@ -33,5 +41,6 @@ Projeyi docker ile çalıştırdıktan sonra curl, wget veya kullandığınız d
 * [Kelime Kökleri (Lemmas)](API.md) : `POST /lemmas`
 * [Kelime Analizi (Analyze Word)](API.md) : `POST /analyze_word`
 * [Cümle Analizi (Analyze Sentence)](API.md) : `POST /analyze_sentence`
+* [Kelime Oluşturma (Generate Word)](API.md) : `POST /generate_word`
 
 ![Örnek Endpoint Ekran Görüntüsü](/docs/endpoint-screenshot.png)
