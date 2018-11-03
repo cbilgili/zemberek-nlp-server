@@ -24,6 +24,8 @@ public class GenerateWordsController extends BaseController {
         post("/generate_word", (req, res) -> {
             String word = req.queryParams("word");
             String morphemes = req.queryParams("morphemes");
+            morphemes = morphemes.replace('|', '+');
+            morphemes = morphemes.replace('→', '+');
             TurkishMorphology morphology =
                     TurkishMorphology.builder().addDictionaryLines(word).disableCache().build();
             DictionaryItem item = morphology.getLexicon().getMatchingItems(word).get(0);
@@ -32,6 +34,7 @@ public class GenerateWordsController extends BaseController {
             for (Result generateResult : results) {
                 GenerateWordResult wordResult = new GenerateWordResult();
                 wordResult.word = word;
+                wordResult.no_surface = generateResult.analysis.formatMorphemesLexical();
                 wordResult.surface = generateResult.surface;
                 wordResult.analysis = generateResult.analysis.formatLong();
                 wordResults.add(wordResult);
@@ -43,6 +46,7 @@ public class GenerateWordsController extends BaseController {
 
 class GenerateWordResult {
     public String word;
+    public String no_surface;
     public String surface;
     public String analysis;
 }
