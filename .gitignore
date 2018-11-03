@@ -1,6 +1,9 @@
 .idea
 .idea/*
 .idea/misc.xml
+.settings/*
+.project
+.classpath
 target/*
 
 .idea/vcs.xml
@@ -10,3 +13,4 @@ target/*
 *.jar
 *.war
 *.ear
+

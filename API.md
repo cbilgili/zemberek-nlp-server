@@ -510,7 +510,7 @@ curl -X POST "http://localhost:4567/analyze_sentence" \
 curl -X POST "http://localhost:4567/generate_words" \
     -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
     --data-raw "word"="yürümek" \
-    --data-raw "morphemes"="Verb,Fut,Past,A3sg"
+    --data-raw "morphemes"="Verb+Fut+Past+A3sg"
 ```
 
 #### Header Parameters
@@ -548,7 +548,7 @@ curl -X POST "http://localhost:4567/generate_words" \
   "enum": [
     "Verb,Fut,Past,A3sg"
   ],
-  "default": "Verb,Fut,Past,A3sg"
+  "default": "Verb+Fut+Past+A3sg"
 }
 ```
 

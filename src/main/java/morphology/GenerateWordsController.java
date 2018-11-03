@@ -28,7 +28,7 @@ public class GenerateWordsController extends BaseController {
                     TurkishMorphology.builder().addDictionaryLines(word).disableCache().build();
             DictionaryItem item = morphology.getLexicon().getMatchingItems(word).get(0);
             List<GenerateWordResult> wordResults = new ArrayList<>();
-            List<Result> results = morphology.getWordGenerator().generate(item, morphemes.split(","));
+            List<Result> results = morphology.getWordGenerator().generate(item, morphemes.split("\\+"));
             for (Result generateResult : results) {
                 GenerateWordResult wordResult = new GenerateWordResult();
                 wordResult.word = word;

@@ -359,7 +359,7 @@
                 },
                 {
                   "key": "morphemes",
-                  "value": "Verb,Fut,Past,A3sg",
+                  "value": "Verb+Fut+Past+A3sg",
                   "enabled": true
                 }
               ]
