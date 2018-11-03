@@ -14,8 +14,8 @@ Türkçe Doğal Dil İşleme konusunda en iyi Java araçlardan olan zemberek'in 
 ## Kurulum
 Dockerhub üzerindeki son sürümü kullanmak için;
 ``` 
-docker pull cbilgili/zemberek-nlp-server:1.1
-docker run -p 4567:4567 cbilgili/zemberek-nlp-server:1.1
+docker pull cbilgili/zemberek-nlp-server:1.2
+docker run -p 4567:4567 cbilgili/zemberek-nlp-server:1.2
 ``` 
 Yerel geliştirme ortamında çalıştırmak için;
 ``` 
