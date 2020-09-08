@@ -26,6 +26,7 @@ public class GenerateWordsController extends BaseController {
             String morphemes = req.queryParams("morphemes");
             morphemes = morphemes.replace('|', '+');
             morphemes = morphemes.replace('→', '+');
+            morphemes = morphemes.replace('\u2192', '+');
             TurkishMorphology morphology =
                     TurkishMorphology.builder().addDictionaryLines(word).disableCache().build();
             DictionaryItem item = morphology.getLexicon().getMatchingItems(word).get(0);
